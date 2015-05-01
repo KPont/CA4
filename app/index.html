@@ -1,0 +1,56 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html ng-app="scotchApp">
+<head>
+    <!-- SCROLLS -->
+    <!-- load bootstrap and fontawesome via CDN -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
+    <!-- SPELLS -->
+    <!-- load angular and angular route via CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="script.js"></script>
+</head>
+<body ng-controller="mainController">
+
+<!-- HEADER AND NAVBAR -->
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">CA4</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fa fa-shield"></i> Documentation </a></li>
+                <li><a href="#contact"><i class="fa fa-comment"></i> Test</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!-- MAIN CONTENT AND INJECTED VIEWS -->
+<div id="main">
+    {{ message }}
+    Search: <input ng-model="query">
+    Sort by:
+    <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+    </select>
+    <ul>
+        <p style="color: red">{{error}}</p>
+        <li ng-repeat="user in users | filter:query | orderBy:orderProp" class="thumbnail">
+            <a ng-href="http://localhost:3000/api/user/{{user.userName}}">{{user.userName}}</a>
+        </li>
+    </ul>
+    </p>
+    <!-- angular templating -->
+    <!-- this is where content will be injected -->
+    <div ng-view></div>
+</div>
+
+</body>
+</html>
